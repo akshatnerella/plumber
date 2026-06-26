@@ -22,6 +22,8 @@ Your AI agent doesn't fix bugs. It patches them. Conditionals on top of conditio
 
 ## Before / after
 
+**The null crash**
+
 You report a null crash. Your agent adds three null checks.
 
 ```python
@@ -41,6 +43,88 @@ Plumber finds the unauthenticated route that should never have passed null here 
 # plumber: fixed the route guard — null shouldn't reach this function
 def get_user_name(user):
     return user.name
+```
+
+---
+
+**The copy-paste guard**
+
+The same check ends up in every function because nobody fixed the caller.
+
+```python
+def send_email(user):
+    if not user.email_verified:
+        return
+    ...
+
+def send_notification(user):
+    if not user.email_verified:
+        return
+    ...
+
+def send_sms(user):
+    if not user.email_verified:
+        return
+    ...
+```
+
+Plumber puts one guard where it belongs and removes the rest.
+
+```python
+# plumber: @require_verified_email on the route — unverified users never reach these
+def send_email(user): ...
+def send_notification(user): ...
+def send_sms(user): ...
+```
+
+---
+
+**The phantom try/except**
+
+Your agent wraps everything in try/except just in case.
+
+```python
+def get_config(key):
+    try:
+        return config[key]
+    except KeyError:
+        return None
+    except TypeError:
+        return None
+    except AttributeError:
+        return None
+```
+
+Plumber uses the one line the stdlib already provides.
+
+```python
+def get_config(key):
+    return config.get(key)
+```
+
+---
+
+**The isinstance chain**
+
+Your agent makes a function accept "anything" instead of fixing what calls it.
+
+```python
+def process(data):
+    if isinstance(data, str):
+        data = json.loads(data)
+    elif isinstance(data, bytes):
+        data = json.loads(data.decode())
+    elif isinstance(data, list):
+        data = {"items": data}
+    return transform(data)
+```
+
+Plumber normalizes at the boundary and keeps the function clean.
+
+```python
+# plumber: deserialize at the API layer — process() only ever sees a dict
+def process(data: dict):
+    return transform(data)
 ```
 
 ## How it works
