@@ -61,7 +61,13 @@ Redesigns are marked `plumber:` so they read as intent, not accident.
 
 ## Install
 
-Claude Code, Codex, Cursor, Windsurf, Cline, Kiro, Copilot, OpenCode, and more — see **[INSTALLATION.md](INSTALLATION.md)**.
+**Claude Code**
+```
+/plugin marketplace add akshatnerella/plumber
+/plugin install plumber@plumber
+```
+
+For Codex, Cursor, Windsurf, Cline, Kiro, Copilot, OpenCode, and more — see [INSTALLATION.md](INSTALLATION.md).
 
 ## Commands
 
