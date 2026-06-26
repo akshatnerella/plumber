@@ -1,0 +1,5 @@
+---
+description: Show explicit root cause diagnosis before acting
+---
+
+Run the plumber diagnostic explicitly and show your work before writing any code. Format: Root cause: [what is actually broken, not the symptom] / Design flaw? [yes/no — if yes, what is wrong structurally] / Patch or redesign? [decision + one-line reason] / What to delete: [anything unnecessary] / Solution: [the genuinely simple fix]. Do not write code until the diagnosis is complete and shown.

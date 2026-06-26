@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "plumber",
+  "description": "Root cause first. An idiot admires complexity, a genius admires simplicity.",
+  "owner": {
+    "name": "Akshat Nerella",
+    "url": "https://github.com/akshatnerella"
+  },
+  "plugins": [
+    {
+      "name": "plumber",
+      "description": "Forces genuine simplicity over patchwork. Fix the pipe, not the floor.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

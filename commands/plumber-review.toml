@@ -1,0 +1,2 @@
+description = "Review current code or diff for patchwork and complexity debt"
+prompt = "Review the current code changes for patchwork only, not correctness. One line per finding: L<line>: <tag> <what is patched>. <redesign>. Tags: patch (fix covering a design flaw), complexity (code added to fight existing complexity), phantom (error handling for scenarios that shouldn't exist), shrink (same logic, genuinely simpler structure). End with the root causes addressable. If nothing to fix: 'Clean pipes. Ship.'"

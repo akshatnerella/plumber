@@ -1,0 +1,14 @@
+{
+  "name": "plumber",
+  "version": "1.0.0",
+  "description": "Root cause first. A plumber fixes the pipe, not the floor. Forces genuinely simple solutions over patchwork code.",
+  "author": {
+    "name": "Akshat Nerella",
+    "url": "https://github.com/akshatnerella"
+  },
+  "homepage": "https://github.com/akshatnerella/plumber",
+  "repository": "https://github.com/akshatnerella/plumber",
+  "license": "MIT",
+  "keywords": ["simplicity", "root-cause", "refactoring", "productivity"],
+  "skills": "./skills/"
+}

@@ -158,7 +158,7 @@ Ponytail and Plumber are complementary, not overlapping:
 - **Ponytail** asks: *does this need to exist at all?* (YAGNI, reuse first)
 - **Plumber** asks: *is what exists actually simple?* (root cause, no patchwork)
 
-Both can run together.
+Both can run together without conflict — they operate at different layers. Ponytail governs *whether* to write code; plumber governs *how* to write it. A one-liner that ponytail approves can still be patchwork that plumber redesigns.
 
 ## Design Decisions
 

@@ -1,0 +1,24 @@
+{
+  "name": "plumber",
+  "version": "1.0.0",
+  "description": "Root cause first. A plumber fixes the pipe, not the floor. Forces genuinely simple solutions over patchwork code.",
+  "author": {
+    "name": "Akshat Nerella",
+    "url": "https://github.com/akshatnerella"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Plumber",
+    "shortDescription": "Root cause first, patch nothing",
+    "longDescription": "Forces genuine simplicity over patchwork. Before writing code: diagnose the root cause, strip what doesn't need to exist, redesign instead of patch.",
+    "developerName": "Akshat Nerella",
+    "category": "Productivity",
+    "capabilities": ["Instructions"],
+    "defaultPrompt": [
+      "Use Plumber mode for this task.",
+      "Review this diff for patchwork.",
+      "Diagnose the root cause before fixing."
+    ],
+    "brandColor": "#1a1a2e"
+  }
+}

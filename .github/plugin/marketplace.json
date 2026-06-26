@@ -1,0 +1,21 @@
+{
+  "name": "plumber",
+  "interface": {
+    "displayName": "Plumber"
+  },
+  "plugins": [
+    {
+      "name": "plumber",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/akshatnerella/plumber.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

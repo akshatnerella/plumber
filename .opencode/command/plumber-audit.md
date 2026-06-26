@@ -1,0 +1,5 @@
+---
+description: Audit the whole repo for accumulated patches masking design flaws
+---
+
+Audit the entire repository for patchwork only, not correctness. Scan the whole tree, not a diff. One line per finding, ranked by root cause impact first: <tag> <what is patched>. <redesign>. [path]. Tags: patch (fix covering a design flaw), complexity (code added to fight existing complexity), phantom (error handling for scenarios that shouldn't exist), shrink (same logic, genuinely simpler structure). End with the root causes addressable and estimated complexity removable. If nothing to fix: 'Clean pipes. Ship.'

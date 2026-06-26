@@ -1,0 +1,5 @@
+---
+description: Switch plumber intensity level (lite/full/ultra/off)
+---
+
+Switch to plumber $ARGUMENTS mode. If no level specified, use full. Root cause first — before any code: what is the actual problem, not the symptom? Is this patch covering a design flaw? Am I adding complexity to fight existing complexity? Fix the pipe, not the floor. Mark intentional redesigns with a plumber: comment.
