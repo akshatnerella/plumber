@@ -1,126 +1,162 @@
-# plumber
+<p align="center">
+  <img src="assets/plumber.jpg" width="220" alt="Plumber, root cause first">
+</p>
 
-> **"An idiot admires complexity, a genius admires simplicity."**
+<h1 align="center">Plumber</h1>
 
-A Claude Code plugin that forces genuine simplicity over patchwork code. A plumber fixes the pipe — not the floor.
+<p align="center">
+  <em>An idiot admires complexity, a genius admires simplicity.</em>
+</p>
 
-Simple and easy are not the same thing. Easy code is familiar and fast to write. Simple code has low complexity and clear structure. AI agents default to easy. Plumber corrects that.
+<p align="center">
+  <img src="https://img.shields.io/github/stars/akshatnerella/plumber?style=flat-square&color=1a1a2e&label=stars" alt="Stars">
+  <img src="https://img.shields.io/github/v/release/akshatnerella/plumber?style=flat-square&color=1a1a2e&label=release" alt="Release">
+  <img src="https://img.shields.io/badge/works%20with-10%20agents-1a1a2e?style=flat-square" alt="Works with 10 agents">
+  <img src="https://img.shields.io/badge/license-MIT-1a1a2e?style=flat-square" alt="MIT license">
+</p>
 
 ---
 
-## The Problem
+You know the type. Shows up with a toolbox, not a theory. Looks at the leak, finds the pipe, fixes the pipe. Doesn't mop the floor and call it a fix.
 
-Left unchecked, AI agents write "cover your ass" code: conditionals layered over conditionals, error handling for scenarios that shouldn't exist, complexity added to fight existing complexity. Every patch hides the real problem one layer deeper.
+Your AI agent is not a plumber. It patches. It layers conditionals over conditionals, adds error handling for scenarios that shouldn't exist, wraps complexity around existing complexity. Every ticket gets a bandage. The pipe keeps leaking.
+
+Plumber puts the real fix inside your agent.
+
+## Before / after
+
+You report a null crash. Your agent adds a null check.
 
 ```python
-# What the agent writes
-def sum_numbers(numbers):
-    total = 0
-    for item in numbers:
-        try:
-            cleaned = str(item).strip()
-            if cleaned:
-                total += float(cleaned)
-        except (ValueError, TypeError):
-            continue
-    return total
-
-# What a plumber writes
-def sum_numbers(numbers):
-    return sum(numbers)
+# what your agent writes
+def get_user_name(user):
+    if user is None:
+        return "Unknown"
+    if not hasattr(user, 'name'):
+        return "Unknown"
+    if user.name is None:
+        return "Unknown"
+    return user.name
 ```
 
-The first version looks careful. It's patchwork. The callers are passing bad data and instead of fixing the callers, the function absorbs the damage. Ten lines defending against a problem that lives upstream.
+With plumber:
 
----
+```python
+# plumber: null was coming from get_current_user() on unauthenticated routes — fixed the route guard
+def get_user_name(user):
+    return user.name
+```
 
-## How It Works
+The null check wasn't the fix. It was a patch over an unauthenticated route that should never have reached this function. One fix upstream, zero guards downstream.
 
-Before writing or modifying any code, plumber runs this diagnostic silently:
+More examples in [examples/](examples/).
 
-1. **What is the actual problem?** Not the symptom — the root cause.
-2. **Is this fix covering a design flaw?** Fix the design, not the symptom.
-3. **Am I adding complexity to fight existing complexity?** Redesign instead.
-4. **Am I handling scenarios that don't need to exist?** Delete them.
-5. **What can I remove without losing core functionality?**
-6. **Is this simple, or just compact?** Short ≠ simple.
-7. Write the minimum. Then refactor. Then refactor again.
+## How it works
+
+Before writing or modifying any code, the agent runs this diagnostic silently:
+
+```
+1. What is the actual problem?          not the symptom — the root cause
+2. Is this fix covering a design flaw?  fix the design, not the symptom
+3. Adding complexity to fight           redesign instead
+   existing complexity?
+4. Handling scenarios that shouldn't    delete them
+   exist?
+5. What can be removed without          strip it
+   losing core functionality?
+6. Simple, or just compact?             short ≠ simple
+7. Only then: write the minimum.        then refactor. then refactor again.
+```
+
+The ladder runs *after* it reads the code and traces the real flow — never instead of reading. Bug fix = root cause, not symptom: grep every caller of the function you touch and fix the shared root once.
 
 Intentional redesigns are marked with a `plumber:` comment so they read as intent, not accident.
 
----
-
-## Installation
+## Install
 
 ### Claude Code
+
 ```
 /plugin marketplace add akshatnerella/plumber
+```
+```
 /plugin install plumber@plumber
 ```
 (Send as two separate prompts)
 
 ### Codex
-```
+
+```bash
 codex plugin marketplace add akshatnerella/plumber
 ```
 
+Open `/plugins`, select the Plumber marketplace, and install Plumber.
+
 ### GitHub Copilot CLI
-Copy `.github/copilot-instructions.md` into your project.
 
-### Cursor
-Copy `.cursor/rules/plumber.mdc` into your project.
-
-### Windsurf
-Copy `.windsurf/rules/plumber.md` into your project.
-
-### Kiro
-Copy `.kiro/steering/plumber.md` into your project.
-
-### Cline
-Copy `.clinerules/plumber.md` into your project.
+```bash
+copilot plugin marketplace add akshatnerella/plumber
+copilot plugin install plumber@plumber
+```
 
 ### OpenCode
+
 Add to `opencode.json`:
+
 ```json
 { "plugin": ["@akshatnerella/plumber"] }
 ```
 
-### Any agent (Codex, GitHub Copilot, Aider)
-Copy `AGENTS.md` into your project root.
+### OpenClaw
 
----
+```bash
+clawhub install plumber
+```
+
+### Cursor, Windsurf, Cline, Kiro, GitHub Copilot (editor), Aider
+
+Copy the matching rules file from this repo:
+
+| Tool | File |
+|------|------|
+| Cursor | [`.cursor/rules/plumber.mdc`](.cursor/rules/plumber.mdc) |
+| Windsurf | [`.windsurf/rules/plumber.md`](.windsurf/rules/plumber.md) |
+| Cline | [`.clinerules/plumber.md`](.clinerules/plumber.md) |
+| Kiro | [`.kiro/steering/plumber.md`](.kiro/steering/plumber.md) |
+| GitHub Copilot | [`.github/copilot-instructions.md`](.github/copilot-instructions.md) |
+| Any agent | [`AGENTS.md`](AGENTS.md) |
+
+### Uninstall
+
+| Host | Command |
+|------|---------|
+| Claude Code | `/plugin remove plumber` |
+| Codex | `codex plugin remove plumber` |
+| Cursor / Windsurf / Cline / etc. | Delete the copied rule file |
 
 ## Commands
 
 | Command | What it does |
 |---------|-------------|
-| `/plumber [lite\|full\|ultra\|off]` | Toggle mode and intensity |
-| `/plumber-diagnose` | Explicit step-by-step root cause breakdown before acting |
-| `/plumber-review` | Review current diff for patchwork and complexity debt |
-| `/plumber-audit` | Whole-repo patchwork audit, ranked by impact |
+| `/plumber [lite \| full \| ultra \| off]` | Set the intensity, or turn it off |
+| `/plumber-diagnose` | Show the full root cause breakdown before acting |
+| `/plumber-review` | Review the current diff for patchwork |
+| `/plumber-audit` | Audit the whole repo for accumulated patches |
 | `/plumber-help` | Quick reference |
 
----
-
-## Intensity Levels
+## Intensity levels
 
 | Level | Behavior |
 |-------|----------|
-| **lite** | Writes the fix, flags "this is a patch — here's the cleaner redesign" in one line. You decide. |
+| **lite** | Writes the fix, flags the cleaner redesign in one line. You decide. |
 | **full** | Runs the ladder silently, redesigns instead of patching. **Default.** |
 | **ultra** | Won't write a line until root cause is identified. Challenges whether the problem should exist at all. |
 
-Example: "Fix this null check that keeps crashing."
+`/plumber ultra` exists for when the codebase has wronged you personally.
 
-- **lite**: "Added null guard. FYI: the crash is a symptom — the caller shouldn't be passing null here."
-- **full**: "Removed the null check. Fixed the caller that was passing null — the guard was hiding a logic error upstream."
-- **ultra**: "Why is null reaching this function? Fix the upstream logic. If null is a valid state, model it explicitly."
+## `/plumber-diagnose`
 
----
-
-## `/plumber-diagnose` Format
-
-When you want to see the reasoning:
+When you want to see the reasoning instead of just the output:
 
 ```
 Root cause:        what is actually broken, not the symptom
@@ -130,9 +166,7 @@ What to delete:    anything unnecessary
 Solution:          the genuinely simple fix
 ```
 
----
-
-## `/plumber-review` Tags
+## `/plumber-review` tags
 
 ```
 L<line>: patch      fix covering a design flaw. Name the flaw.
@@ -141,64 +175,41 @@ L<line>: phantom    error handling for a scenario that shouldn't exist.
 L<line>: shrink     same logic, genuinely simpler structure.
 ```
 
-Ends with: `root causes addressable: N.` or `Clean pipes. Ship.`
+Ends with `root causes addressable: N.` or `Clean pipes. Ship.`
 
----
+## Works alongside Ponytail
 
-## Examples
-
-### Factorial
-
-```python
-# Patchwork — patches a caller contract problem inside the wrong function
-def factorial(n):
-    if not isinstance(n, int):
-        raise TypeError("n must be an integer")
-    if n < 0:
-        raise ValueError("n must be non-negative")
-    result = 1
-    for i in range(1, n + 1):
-        result *= i
-    return result
-
-# plumber: validate at boundaries, not inside every function
-def factorial(n):
-    return 1 if n == 0 else n * factorial(n - 1)
-```
-
-### Sum function
-
-```python
-# Patchwork — absorbing bad caller data instead of fixing the caller
-def sum_numbers(numbers):
-    total = 0
-    for item in numbers:
-        try:
-            cleaned = str(item).strip()
-            if cleaned:
-                total += float(cleaned)
-        except (ValueError, TypeError):
-            continue
-    return total
-
-# plumber: trust the caller; fix the caller if it sends garbage
-def sum_numbers(numbers):
-    return sum(numbers)
-```
-
----
-
-## Works Alongside Ponytail
-
-Plumber and [ponytail](https://github.com/DietrichGebert/ponytail) are complementary:
+Plumber and [ponytail](https://github.com/DietrichGebert/ponytail) are complementary, not competing:
 
 - **Ponytail** asks: *does this need to exist at all?* (YAGNI, reuse first)
 - **Plumber** asks: *is what exists actually simple?* (root cause, no patchwork)
 
-Both can run in the same session without conflict. Ponytail governs *whether* to write code; plumber governs *how* to write it.
+A one-liner ponytail approves can still be patchwork plumber redesigns. Both can run in the same session without conflict.
 
----
+## FAQ
+
+**Does it need a config file?**  
+No. Works out of the box. `/plumber off` to silence it, `/plumber` to resume.
+
+**What if the patch is genuinely the right call?**  
+Sometimes it is. Use `/plumber lite` — it writes the fix and tells you in one line what the cleaner alternative looks like. You decide.
+
+**What's the difference between simple and easy?**  
+Easy is familiar and fast to write. Simple has low complexity and clear structure. A regex is easy. A proper parser is simple. Your agent optimizes for easy. Plumber corrects that.
+
+**Why "plumber"?**  
+A plumber fixes the pipe. Not the floor.
 
 ## License
 
-MIT
+[MIT](LICENSE)
+
+## Star History
+
+<a href="https://www.star-history.com/akshatnerella/plumber#history">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=akshatnerella/plumber&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=akshatnerella/plumber&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=akshatnerella/plumber&type=Date" />
+ </picture>
+</a>
