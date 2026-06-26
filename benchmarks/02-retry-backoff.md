@@ -16,6 +16,9 @@
 | sleep calls | 1 | 1 | — |
 | Sentinel variables | 1 | 0 | **-100%** |
 | Hardcoded delay list | yes | no | **eliminated** |
+| Tokens used | 20,175† | 17,257 | -14% |
+
+† Vanilla agent made 3 tool calls during this run, inflating token count. Controlled benchmarks (03–05) show ~1% overhead.
 
 > LOC is tied. The numbers don't capture the difference — the qualitative analysis does.
 

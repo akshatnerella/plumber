@@ -15,6 +15,9 @@
 | `isinstance` checks | 5 | 3 | -40% |
 | try/except blocks | 1 | 1 | — |
 | Functions defined | 1 | 1 | — |
+| Tokens used | 17,060 | 20,781 | +22%† |
+
+† Plumber agent made 3 tool calls during this run, inflating token count. Controlled benchmarks (03–05) show ~1% overhead.
 
 ---
 

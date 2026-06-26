@@ -16,6 +16,7 @@
 | isinstance checks | 0 | 0 | — |
 | Unique binding variables | 3 (`host`, `port`, `debug`) | 1 (`v`) | **-67%** |
 | Bool parsed as positive check | no | yes | **safer** |
+| Tokens used | 17,089 | 17,275 | +1.1% |
 
 > LOC and conditions are tied. Differences are in correctness and intent clarity.
 
