@@ -61,15 +61,7 @@ Redesigns are marked `plumber:` so they read as intent, not accident.
 
 ## Install
 
-**Claude Code**
-```
-/plugin marketplace add akshatnerella/plumber
-/plugin install plumber@plumber
-```
-
-**Cursor / Windsurf / Cline / Kiro / Copilot** — copy the matching file from [`.cursor/`](.cursor/rules/plumber.mdc), [`.windsurf/`](.windsurf/rules/plumber.md), [`.clinerules/`](.clinerules/plumber.md), [`.kiro/`](.kiro/steering/plumber.md), [`.github/`](.github/copilot-instructions.md)
-
-**Any agent** — copy [`AGENTS.md`](AGENTS.md) to your project root.
+Claude Code, Codex, Cursor, Windsurf, Cline, Kiro, Copilot, OpenCode, and more — see **[INSTALLATION.md](INSTALLATION.md)**.
 
 ## Commands
 
