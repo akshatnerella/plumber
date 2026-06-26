@@ -127,6 +127,23 @@ def process(data: dict):
     return transform(data)
 ```
 
+## Benchmarks
+
+5 tasks. Same model. Same prompt. Vanilla vs Plumber.
+
+| Task | LOC Δ | Conditions Δ | Token Δ |
+|------|:-----:|:------------:|:-------:|
+| Request handler | -18% | -25% | ~+1% |
+| Retry with backoff | — | — | ~+1% |
+| Config loader | — | — | +1.1% |
+| Multi-format export | +27% | -25% | +1.2% |
+| Logging decorator | +30% | — | +1.2% |
+| **Average** | **+12%** | **-18%** | **~+1%** |
+
+Plumber wrote **more lines** on average — not fewer. The real metric is conditions: **-18% fewer branches** across all tasks. Token cost is negligible (~1% overhead).
+
+The biggest wins aren't in the table: sentinel variables eliminated, catch-all exceptions replaced with specific ones, hardcoded lists replaced with formulas, booleans parsed safely. See [benchmarks/](benchmarks/) for full case studies.
+
 ## How it works
 
 Before touching any code, the agent runs this silently:
