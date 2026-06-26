@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/plumber.jpg" width="220" alt="Plumber, root cause first">
+  <img src="assets/plumber.png" width="220" alt="Plumber, root cause first">
 </p>
 
 <h1 align="center">Plumber</h1>
