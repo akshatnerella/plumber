@@ -177,15 +177,6 @@ L<line>: shrink     same logic, genuinely simpler structure.
 
 Ends with `root causes addressable: N.` or `Clean pipes. Ship.`
 
-## Works alongside Ponytail
-
-Plumber and [ponytail](https://github.com/DietrichGebert/ponytail) are complementary, not competing:
-
-- **Ponytail** asks: *does this need to exist at all?* (YAGNI, reuse first)
-- **Plumber** asks: *is what exists actually simple?* (root cause, no patchwork)
-
-A one-liner ponytail approves can still be patchwork plumber redesigns. Both can run in the same session without conflict.
-
 ## FAQ
 
 **Does it need a config file?**  
